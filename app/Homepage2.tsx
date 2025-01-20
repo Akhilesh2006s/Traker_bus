@@ -161,9 +161,9 @@ const HomePage: React.FC = () => {
               <Image source={require("@/assets/images/Analytics.png")} style={styles.boxImage} />
               <Text style={styles.boxText}>Analytics</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.box} onPress={() => handleBoxPress("Busfaculty")}>
+            <TouchableOpacity style={styles.box} onPress={() => handleBoxPress("FAaculty")}>
               <Image source={require("@/assets/images/d.png")} style={styles.boxImage} />
-              <Text style={styles.boxText}>Bus driver</Text>
+              <Text style={styles.boxText}>Faculty</Text>
             </TouchableOpacity>
           </View>
         </View>

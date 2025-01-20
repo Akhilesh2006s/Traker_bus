@@ -4,10 +4,11 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const mysql = require('mysql');
+
 dotenv.config();
 
 const app = express();
-const PORT = 8081;
+const PORT = 8083; // Changed to avoid port conflict
 
 // Middleware
 app.use(cors());
@@ -16,9 +17,9 @@ app.use(bodyParser.json());
 // MySQL Database Setup
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root',  // Update with your MySQL credentials
-  password: '',
-  database: 'bus_tracking',
+  user: 'root',  // Your MySQL username
+  password: 'root',  // Your MySQL password
+  database: 'bus_tracking_db',  // The database you created
 });
 
 db.connect(err => {
@@ -31,6 +32,11 @@ db.connect(err => {
 
 // JWT Secret Key
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+
+// Root Route
+app.get('/', (req, res) => {
+  res.send('Welcome to the Bus Tracking API!');
+});
 
 // Login Route
 app.post('/login', (req, res) => {
@@ -62,4 +68,5 @@ app.post('/login', (req, res) => {
 // Start the Server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+  console.log('Connected to the database.');
 });

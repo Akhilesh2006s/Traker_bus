@@ -5,22 +5,40 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [studentID, setStudentID] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  const handleLogin = () => {
-    const validDomains = ['@vitapstudent.ac.in', '@vitap.ac.in'];
-    const isValidEmail = validDomains.some(domain => email.endsWith(domain));
+  const DEFAULT_PASSWORD = 'vitap123'; // Default password for students
+  const ADMIN_ID = 'Adminvit';
+  const ADMIN_PASSWORD = 'Adminbus';
 
-    if (!isValidEmail) {
-      Alert.alert('Invalid Email', 'Please enter a valid email address from vitapstudent.ac.in or vitap.ac.in');
+  const handleLogin = () => {
+    // Check if admin credentials are provided
+    if (studentID === ADMIN_ID && password === ADMIN_PASSWORD) {
+      Alert.alert('Admin Login Successful', `Welcome, Admin`);
+      router.replace('/NextPage'); // Navigate to Admin Page
       return;
     }
 
-    Alert.alert('Login Successful', `Welcome, ${email}`);
-    router.replace('/NextPage');
+    const validPrefixes = ['BCE', 'BCB', 'BEC', 'BBA','MIS'];
+    const prefix = studentID.slice(2, 5);
+    const isValidID = validPrefixes.includes(prefix) && (studentID.length === 9 || studentID.length === 10);
+
+    if (!isValidID) {
+      Alert.alert('Invalid ID', 'Please enter a valid Student ID (e.g., 23BCExxxx)');
+      return;
+    }
+
+    // Check if the password matches the default
+    if (password !== DEFAULT_PASSWORD) {
+      Alert.alert('Invalid Password', 'Please enter the correct default password.');
+      return;
+    }
+
+    Alert.alert('Login Successful', `Welcome, ${studentID}`);
+    router.replace('/NextPage2'); // Navigate to Student Page
   };
 
   return (
@@ -42,11 +60,11 @@ const Login = () => {
 
         <TextInput
           style={styles.input}
-          placeholder="Enter your email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
+          placeholder="Enter your Student ID or Admin ID"
+          value={studentID}
+          onChangeText={setStudentID}
+          keyboardType="default"
+          autoCapitalize="characters"
           placeholderTextColor="#A0A0A0"
         />
 

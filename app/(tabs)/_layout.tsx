@@ -4,8 +4,10 @@ import Loading from '../Loading';
 import Login from '../Login';
 import NextPage from '../NextPage';
 import HomePage from '../HomePage'; 
+import HomePage2 from '../Homepage2'; 
 import MapPage from '../MapPage';   
-import DeveloperPage from '../DeveloperPage'; 
+import Faculty from '../Faculty';
+import DeveloperPage from '../busfaculty'; // Ensure this is imported
 
 const Stack = createStackNavigator();
 
@@ -40,7 +42,7 @@ export default function RootLayout() {
         component={MapPage} 
         options={{ headerShown: false }} // Hide header for MapPage
       />
-       <Stack.Screen 
+      <Stack.Screen 
         name="DeveloperPage" 
         component={DeveloperPage} 
         options={{ headerShown: false }} // Hide header for DeveloperPage

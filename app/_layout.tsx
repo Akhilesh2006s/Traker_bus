@@ -1,4 +1,3 @@
-// e:\Vit-ap\app\_layout.tsx
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -30,6 +29,13 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="Loading" options={{ headerShown: false }} />
+        <Stack.Screen name="Login" options={{ headerShown: false }} />
+        <Stack.Screen name="NextPage" options={{ headerShown: false }} />
+       <Stack.Screen name="NextPage2" options={{ headerShown: false }} />
+
+        <Stack.Screen name="MapPage" options={{ headerShown: false }} />
+        <Stack.Screen name="DeveloperPage" options={{ headerShown: false }} />
+        <Stack.Screen name="Faculty" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" /> {/* Keep this line to handle not-found routes */}
       </Stack>

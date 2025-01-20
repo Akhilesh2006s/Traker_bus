@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import HomePage from './HomePage'; 
+import HomePage2 from './Homepage2'; 
 import MapPage from './MapPage'; 
 import ProfilePage from './ProfilePage'; 
 
@@ -38,7 +38,7 @@ const NextPage: React.FC = () => {
         headerShown: false, // Hide header for all screens
       })}
     >
-      <Tab.Screen name="Home" component={HomePage} />
+      <Tab.Screen name="Home" component={HomePage2} />
       <Tab.Screen name="Map" component={MapPage} />
       <Tab.Screen name="Profile" component={ProfilePage} />
     </Tab.Navigator>

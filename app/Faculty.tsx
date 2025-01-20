@@ -12,6 +12,7 @@ const developers = [
     instagram: 'https://www.instagram.com/_akhileshs26_/?hl=en',
     linkedin: 'https://www.linkedin.com/in/akhilesh-samayamanthula-60987b284/',
   },
+  // Add more developers as needed
 ];
 
 const DeveloperPage: React.FC = () => {
@@ -27,7 +28,7 @@ const DeveloperPage: React.FC = () => {
       
       {developers.map((developer, index) => (
         <View key={index} style={styles.developerContainer}>
-          <Image source={require('@/assets/images/Akhilesh.jpeg')} style={styles.profilePicture} />
+          <Image source={{ uri: developer.photo }} style={styles.profilePicture} />
           <View style={styles.details}>
             <Text style={styles.name}>{developer.name}</Text>
             <Text style={styles.role}>{developer.role}</Text>
@@ -96,11 +97,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#888',
     marginBottom: 10,
-    color: 'black',
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
-    width: 'fit-content',
   },
   socialLinks: {
     flexDirection: 'row',
