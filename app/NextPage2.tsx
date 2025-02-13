@@ -1,41 +1,37 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
-import HomePage2 from './Homepage2'; 
-import MapPage from './MapPage'; 
-import ProfilePage from './ProfilePage'; 
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import { useAuth } from "@clerk/clerk-expo";
+import HomePage2 from "./Homepage2";
+import MapPage from "./MapPage";
+import ProfilePage from "./ProfilePage";
+import { useRouter } from "expo-router";
 
 const Tab = createBottomTabNavigator();
 
-const NextPage: React.FC = () => {
+const NextPage2: React.FC = () => {
+  const { isSignedIn } = useAuth();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (!isSignedIn) {
+      router.replace("/Login"); // Redirect to login if not signed in
+    }
+  }, [isSignedIn]);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName: 'home' | 'home-outline' | 'location' | 'location-outline' | 'person' | 'person-outline'; // Ensure these match exactly as expected by Ionicons
-
-          switch (route.name) {
-            case 'Home':
-              iconName = focused ? 'home' : 'home-outline';
-              break;
-            case 'Map':
-              iconName = focused ? 'location' : 'location-outline';
-              break;
-            case 'Profile':
-              iconName = focused ? 'person' : 'person-outline';
-              break;
-            default:
-              iconName = 'home'; // Default icon
-          }
-
+          let iconName = focused ? "home" : "home-outline";
+          if (route.name === "Map") iconName = focused ? "location" : "location-outline";
+          if (route.name === "Profile") iconName = focused ? "person" : "person-outline";
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#000', // Active icon color black
-        tabBarInactiveTintColor: 'gray',
-        tabBarStyle: {
-          backgroundColor: 'white', // White background for the bottom tab bar
-        },
-        headerShown: false, // Hide header for all screens
+        tabBarActiveTintColor: "#000",
+        tabBarInactiveTintColor: "gray",
+        tabBarStyle: { backgroundColor: "white" },
+        headerShown: false,
       })}
     >
       <Tab.Screen name="Home" component={HomePage2} />
@@ -45,4 +41,4 @@ const NextPage: React.FC = () => {
   );
 };
 
-export default NextPage;
+export default NextPage2;
